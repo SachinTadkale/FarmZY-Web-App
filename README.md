@@ -1,0 +1,14 @@
+# 🌾 FarmZy Web App (Frontend)
+
+Frontend application for the **FarmZy B2B Marketplace**, built using a modern React architecture for scalability, performance, and maintainability.
+
+---
+
+# ⚡ Quick Start
+
+```bash
+git clone <YOUR_REPO_URL>
+cd farmzy-web
+npm install
+cp .env.example .env
+npm run dev
