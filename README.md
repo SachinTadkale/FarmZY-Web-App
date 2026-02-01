@@ -7,7 +7,8 @@ Frontend application for the **FarmZy B2B Marketplace**, built using a modern Re
 # ⚡ Quick Start
 
 git clone https://github.com/SachinTadkale/FarmZY-Web-App.git
-
 cd farmzy-web
+
 npm install
+
 npm run dev
