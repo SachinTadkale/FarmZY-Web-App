@@ -16,7 +16,6 @@ const PasswordLogin = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-
       <input
         type="email"
         placeholder="Enter your email"
@@ -31,6 +30,15 @@ const PasswordLogin = () => {
         required
       />
 
+      <div className="text-right">
+        <button
+          type="button"
+          className="text-sm text-farmGreen hover:underline"
+        >
+          Forgot Password?
+        </button>
+      </div>
+
       <button
         type="submit"
         disabled={loading}
@@ -38,7 +46,6 @@ const PasswordLogin = () => {
       >
         {loading ? "Logging in..." : "Login"}
       </button>
-
     </form>
   );
 };
