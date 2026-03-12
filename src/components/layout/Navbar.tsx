@@ -20,7 +20,7 @@ const Navbar = () => {
       {
         rootMargin: "-40% 0px -50% 0px",
         threshold: 0.1,
-      }
+      },
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -41,7 +41,6 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50 h-16 flex items-center">
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center w-full">
-
         {/* Logo */}
         <a href="#home" className="text-2xl font-bold text-farmGreen">
           Farmzy
@@ -49,7 +48,6 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-8 font-medium ml-10">
-
           <li>
             <a href="#home" className={linkClass("home")}>
               Home
@@ -77,7 +75,6 @@ const Navbar = () => {
               {underline("contact")}
             </a>
           </li>
-
         </ul>
 
         {/* Buttons */}
@@ -108,25 +105,55 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-farmBg px-6 pb-4 space-y-4">
-          <a href="#home" className="block">Home</a>
-          <a href="#about" className="block">About</a>
-          <a href="#features" className="block">Features</a>
-          <a href="#contact" className="block">Contact</a>
+        <div className="fixed inset-0 bg-black/40 z-40 md:hidden">
+          <div className="absolute top-0 left-0 w-full bg-white shadow-lg p-6 space-y-6">
+            {/* Close Button */}
+            <div className="flex justify-between items-center">
+              <span className="text-xl font-bold text-farmGreen">Menu</span>
 
-          <Link
-            to="/login"
-            className="block border border-farmGreen text-farmGreen px-4 py-2 rounded-lg text-center"
-          >
-            Login
-          </Link>
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="text-2xl text-farmGreen"
+              >
+                <FaTimes />
+              </button>
+            </div>
 
-          <a
-            href="#download"
-            className="block bg-farmGreen text-white px-4 py-2 rounded-lg text-center"
-          >
-            Download App
-          </a>
+            {/* Links */}
+            <nav className="flex flex-col space-y-4 text-lg font-medium">
+              <a href="#home" onClick={() => setMenuOpen(false)}>
+                Home
+              </a>
+              <a href="#features" onClick={() => setMenuOpen(false)}>
+                Features
+              </a>
+              <a href="#about" onClick={() => setMenuOpen(false)}>
+                About
+              </a>
+              <a href="#contact" onClick={() => setMenuOpen(false)}>
+                Contact
+              </a>
+            </nav>
+
+            {/* Buttons */}
+            <div className="flex flex-col gap-3 pt-4">
+              <Link
+                to="/login"
+                onClick={() => setMenuOpen(false)}
+                className="border border-farmGreen text-farmGreen py-3 rounded-lg text-center"
+              >
+                Login
+              </Link>
+
+              <a
+                href="#download"
+                onClick={() => setMenuOpen(false)}
+                className="bg-farmGreen text-white py-3 rounded-lg text-center"
+              >
+                Download App
+              </a>
+            </div>
+          </div>
         </div>
       )}
     </nav>

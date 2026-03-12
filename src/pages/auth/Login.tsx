@@ -10,31 +10,26 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-farmBg flex items-center justify-center px-6">
       <div className="max-w-5xl w-full bg-white rounded-xl shadow-lg grid md:grid-cols-2 overflow-hidden">
-
         {/* LEFT */}
         <div className="hidden md:flex items-center justify-center bg-farmGreen text-white p-10">
           <div>
-            <h2 className="text-3xl font-bold mb-4">
-              Welcome to Farmzy
-            </h2>
+            <h2 className="text-3xl font-bold mb-4">Welcome to Farmzy</h2>
 
             <p className="text-sm opacity-90">
-              A digital agriculture marketplace connecting farmers and
-              companies for transparent crop trading.
+              A digital agriculture marketplace connecting farmers and companies
+              for transparent crop trading.
             </p>
           </div>
         </div>
 
         {/* RIGHT */}
         <div className="p-10">
-
           <h2 className="text-2xl font-bold text-farmDark mb-6 text-center">
             Login to Farmzy
           </h2>
 
           {/* Tabs */}
-          <div className="flex border-b mb-6">
-
+          <div className="min-h-[150px] flex border-b mb-6">
             <button
               onClick={() => setTab("password")}
               className={`flex-1 py-2 font-medium transition ${
@@ -56,14 +51,11 @@ const Login = () => {
             >
               OTP Login
             </button>
-
           </div>
 
           {/* Form Container */}
-          <div className="relative h-[210px] overflow-hidden">
-
+          <div className="relative h-[220px] overflow-hidden">
             <AnimatePresence mode="wait">
-
               {tab === "password" && (
                 <motion.div
                   key="password"
@@ -89,9 +81,7 @@ const Login = () => {
                   <OtpLogin />
                 </motion.div>
               )}
-
             </AnimatePresence>
-
           </div>
 
           {/* Register */}
@@ -104,9 +94,7 @@ const Login = () => {
               Register
             </Link>
           </p>
-
         </div>
-
       </div>
     </div>
   );

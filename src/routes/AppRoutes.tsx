@@ -12,7 +12,6 @@ const AppRoutes = () => {
 
       {/* Auth */}
       <Route path="/login" element={<Login />} />
-      {/* <Route path="/choose-role" element={<ChooseRole />} /> */}
 
       {/* Fallback */}
       <Route
