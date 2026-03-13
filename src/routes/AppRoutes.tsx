@@ -1,14 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 
 import Login from "@/pages/auth/Login";
-import Home from "@/pages/Public/Home/Home";
+import LandingPage from "@/pages/Public/Home/LandingPage";
 import PageNotFound from "@/pages/Page_Not_Found/Page_Not_Found";
 
 const AppRoutes = () => {
   return (
     <Routes>
       {/* Public Pages */}
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<LandingPage />} />
 
       {/* Auth */}
       <Route path="/login" element={<Login />} />
