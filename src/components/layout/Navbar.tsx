@@ -4,77 +4,58 @@ import { FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const [active, setActive] = useState<string>("home");
+  const [scrolled, setScrolled] = useState<boolean>(false);
 
   useEffect(() => {
-    const sections = document.querySelectorAll<HTMLElement>("section");
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: "-40% 0px -50% 0px",
-        threshold: 0.1,
-      }
-    );
+    window.addEventListener("scroll", handleScroll);
 
-    sections.forEach((section) => observer.observe(section));
-
-    return () => sections.forEach((section) => observer.unobserve(section));
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const linkClass = (id: string) =>
-    `relative cursor-pointer transition duration-300 ${
-      active === id ? "text-farmGreen font-semibold" : "text-gray-700"
-    }`;
-
-  const underline = (id: string) =>
-    active === id ? (
-      <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-farmGreen"></span>
-    ) : null;
+  const navStyle = scrolled
+    ? "bg-white shadow-md"
+    : "bg-white/70 backdrop-blur-md";
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50 h-16 flex items-center">
+    <nav className={`${navStyle} sticky top-0 z-50 h-16 flex items-center`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center w-full">
 
         {/* Logo */}
-        <a href="#home" className="text-2xl font-bold text-farmGreen">
-          FarmZY
+        <a
+          href="#home"
+          className="text-2xl font-bold text-farmGreen"
+        >
+          Farmzy
         </a>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-8 font-medium ml-10">
+        <ul className="hidden md:flex space-x-8 font-medium text-gray-700">
 
           <li>
-            <a href="#home" className={linkClass("home")}>
-              Home
-              {underline("home")}
+            <a href="#ecosystem" className="hover:text-farmGreen">
+              Ecosystem
             </a>
           </li>
 
           <li>
-            <a href="#features" className={linkClass("features")}>
-              Features
-              {underline("features")}
+            <a href="#services" className="hover:text-farmGreen">
+              Services
             </a>
           </li>
 
           <li>
-            <a href="#about" className={linkClass("about")}>
-              About
-              {underline("about")}
+            <a href="#how-it-works" className="hover:text-farmGreen">
+              How it works
             </a>
           </li>
 
           <li>
-            <a href="#contact" className={linkClass("contact")}>
+            <a href="#contact" className="hover:text-farmGreen">
               Contact
-              {underline("contact")}
             </a>
           </li>
 
@@ -82,12 +63,13 @@ const Navbar = () => {
 
         {/* Buttons */}
         <div className="hidden md:flex items-center space-x-4">
-          {/* <Link
+
+          <Link
             to="/login"
             className="px-4 py-2 border border-farmGreen text-farmGreen rounded-lg hover:bg-farmGreen hover:text-white transition"
           >
             Login
-          </Link> */}
+          </Link>
 
           <a
             href="#download"
@@ -95,38 +77,79 @@ const Navbar = () => {
           >
             Download App
           </a>
+
         </div>
 
         {/* Mobile Menu Button */}
-        <div
-          className="md:hidden text-xl text-farmGreen cursor-pointer"
+        <button
+          className="md:hidden text-xl text-farmGreen"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <FaTimes /> : <FaBars />}
-        </div>
+        </button>
+
       </div>
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-farmBg px-6 pb-4 space-y-4">
-          <a href="#home" className="block">Home</a>
-          <a href="#about" className="block">About</a>
-          <a href="#features" className="block">Features</a>
-          <a href="#contact" className="block">Contact</a>
+        <div className="fixed inset-0 bg-black/40 z-40 md:hidden">
 
-          <Link
-            to="/login"
-            className="block border border-farmGreen text-farmGreen px-4 py-2 rounded-lg text-center"
-          >
-            Login
-          </Link>
+          <div className="absolute top-0 left-0 w-full bg-white shadow-lg p-6 space-y-6">
 
-          <a
-            href="#download"
-            className="block bg-farmGreen text-white px-4 py-2 rounded-lg text-center"
-          >
-            Download App
-          </a>
+            <div className="flex justify-between items-center">
+              <span className="text-xl font-bold text-farmGreen">
+                Menu
+              </span>
+
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="text-2xl text-farmGreen"
+              >
+                <FaTimes />
+              </button>
+            </div>
+
+            <nav className="flex flex-col space-y-4 text-lg font-medium">
+
+              <a href="#ecosystem" onClick={() => setMenuOpen(false)}>
+                Ecosystem
+              </a>
+
+              <a href="#services" onClick={() => setMenuOpen(false)}>
+                Services
+              </a>
+
+              <a href="#how-it-works" onClick={() => setMenuOpen(false)}>
+                How it works
+              </a>
+
+              <a href="#contact" onClick={() => setMenuOpen(false)}>
+                Contact
+              </a>
+
+            </nav>
+
+            <div className="flex flex-col gap-3 pt-4">
+
+              <Link
+                to="/login"
+                onClick={() => setMenuOpen(false)}
+                className="border border-farmGreen text-farmGreen py-3 rounded-lg text-center"
+              >
+                Login
+              </Link>
+
+              <a
+                href="#download"
+                onClick={() => setMenuOpen(false)}
+                className="bg-farmGreen text-white py-3 rounded-lg text-center"
+              >
+                Download App
+              </a>
+
+            </div>
+
+          </div>
         </div>
       )}
     </nav>
